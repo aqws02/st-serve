@@ -1,5 +1,6 @@
+#!/usr/bin/env node
 const DEFAULT_PORT = 8800;
-const DEFAULT_INDEX = 'index.html';
+const DEFAULT_INDEX = '';
 const DEFAULT_DIRNAME = '';
 const DEFAULT_OPEN = false;
 
