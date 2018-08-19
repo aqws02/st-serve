@@ -1,0 +1,41 @@
+const DEFAULT_PORT = 8800;
+const DEFAULT_INDEX = 'index.html';
+const DEFAULT_DIRNAME = '';
+const DEFAULT_OPEN = false;
+
+
+var path = require('path');
+var program = require('commander');
+
+var chalk = require('chalk');
+
+var pkg = require(path.join(__dirname, '..', 'package.json'));
+var templates = {};
+program
+	.version(pkg.name + '@' + pkg.version)
+	.usage('[options] <root_path>')
+	.option('-p, --port <n>', 'the port to listen to for incoming HTTP connections', DEFAULT_PORT)
+	.option('-i, --index <filename>', 'the default index file if not specified', DEFAULT_INDEX)
+	.option('-D, --dirname  <filename>', 'dir dirname', DEFAULT_DIRNAME)
+	.option('-o, --open <filename>', 'open server in the local browser', DEFAULT_OPEN)
+	.parse(process.argv);;
+
+var StaticServer = require('../index.js');
+var server;
+
+server = new StaticServer(program);
+server.start(function() {
+	console.log(chalk.blue('*'), 'Static server successfully started.');
+	console.log(chalk.blue('*'), 'Serving files at:', chalk.cyan('http://localhost:' + program.port));
+	console.log(chalk.blue('*'), 'Press', chalk.yellow.bold('Ctrl+C'), 'to shutdown.');
+
+	return server;
+});
+
+process.on('exit', function() {
+	if (server) {
+		console.log(chalk.blue('*'), 'Shutting down server');
+		server.stop();
+	}
+	console.log(); // extra blank line
+});
