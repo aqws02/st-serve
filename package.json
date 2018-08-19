@@ -6,13 +6,18 @@
   "bin": {
     "st-serve": "./bin/www"
   },
+  
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:aqws02/st-serve.git"
+  },
   "scripts": {
     "test": "static"
   },
   "keywords": [
     "static"
   ],
-  "author": "weisong.li",
+  "author": "weisong.li ",
   "license": "ISC",
   "dependencies": {
     "chalk": "^2.4.1",
